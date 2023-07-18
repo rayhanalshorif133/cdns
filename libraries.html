@@ -24,6 +24,7 @@
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
         <!-- Include Tailwind CSS -->
         <script src="https://cdn.tailwindcss.com"></script>
+        <script src="js/tailwind.config.js"></script>
         <!-- Include jquery -->
         <script
             src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -32,9 +33,8 @@
         <div class="bg-[#343535] h-20 w-full">
             <div class="flex justify-between w-10/12 m-auto items-center">
                 <div class="flex">
-                    <a href="/"
-                        class="text-5xl font-bold text-slate-100 mt-1 cdnHome"><
-                        <span class="text-red-400">cdn</span>s ></a>
+                    <a href="/" class="text-5xl font-semibold text-slate-100 mt-1 cdnHome">
+                        <i class="fa-solid fa-chevron-left text-gray-400"></i><span class="text-red-400">cdn</span>s<i class="fa-solid fa-chevron-right text-gray-400"></i></a>
                 </div>
                 <div class="flex">
                     <nav class="flex justify-center space-x-3 my-auto mt-4">
@@ -82,7 +82,7 @@
                         type="search" name="search"
                         placeholder="Search for cdns">
                     <i
-                        class="fas fa-search text-xl absolute right-5 top-[40%] text-gray-700"></i>
+                        class="fas fa-search text-xl absolute right-5 top-[50%] text-gray-700"></i>
                 </div>
             </div>
             <div class="flex justify-center mx-auto">
@@ -94,7 +94,14 @@
             <div class="w-8/12 mx-auto pt-10">
                 <div class="grid grid-cols-2 gap-6">
                     <div class="bg-[#343535] h-32">
-                        hi
+                       <div class="flex justify-between px-5 py-3">
+                            <div class="">
+                                <span class="text-xl text-clifford">react @ 18.2.0</span>
+                            </div>
+                            <div class="">
+                                <span class="text-2xl text-white">react @ 18.2.0</span>
+                            </div>
+                       </div>
                     </div>
                     <div class="bg-[#343535] h-32">
                         hi
