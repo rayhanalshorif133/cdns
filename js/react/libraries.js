@@ -77,7 +77,7 @@ const Header = () => {
 
 const BootcampAndSearch = () => {
 
-    const { inputRef, setSearchValue, homeUrl } = useContext(libraryContext);
+    const { inputRef, setSearchValue, homeUrl,libraries } = useContext(libraryContext);
 
 
     const handleInput = () => {
@@ -109,20 +109,15 @@ const BootcampAndSearch = () => {
                 </div>
             </div>
             <div className="flex justify-center mx-auto">
-                <h3 className="text-lg text-[#8EA6A6] text-semibold py-2">Many
-                    libraries found in 1ms.</h3>
+                <h3 className="text-lg text-[#8EA6A6] text-semibold py-2">
+                    {libraries.length > 0? <span className="text-cdnColor font-semibold">{libraries.length}</span> : "Many"} libraries found in 1ms.</h3>
             </div>
         </div>);
 }
 
 const Library = () => {
 
-    const [libraries, setLibraries] = useState([]);
-    useEffect(() => {
-        axios.get('https://cdns-ad86e-default-rtdb.firebaseio.com/libraries.json').then((res) => {
-            setLibraries(res.data);
-        });
-    }, []);
+    const {libraries} = useContext(libraryContext);    
 
     return (<div className="bg-[#454647] w-full h-screen pb-10">
         <div className="w-8/12 mx-auto pt-10">
@@ -158,10 +153,16 @@ const LibraryBox = ({ item }) => {
         }
     }, [searchValue]);
 
-    const urlWithTags = `<script src=${url}></script>`
+    // <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
-
-
+    // get url extension
+    const urlExtension = url.split('.').pop();
+    var urlWithTags = "";
+    if(urlExtension === 'css') {
+        urlWithTags = `<link href=${url} rel="stylesheet">`;
+    }else {
+        urlWithTags = `<script src=${url}></script>`;
+    }
     return (
         <div className={`bg-[#343535] h-32 ${isSearch == false && 'hidden'}`}>
             <div className="flex justify-between px-5 py-3">
@@ -207,9 +208,9 @@ const LibraryBox = ({ item }) => {
 
 function Tooltip({ message, children }) {
     return (
-        <div class="group relative flex">
+        <div className="group relative flex">
             {children}
-            <span class="absolute top-10 scale-0 w-50 transition-all rounded bg-gray-800 p-2 text-sm text-white group-hover:scale-100">{message}</span>
+            <span className="absolute top-10 scale-0 w-50 transition-all rounded bg-gray-800 p-2 text-sm text-white group-hover:scale-100">{message}</span>
         </div>
     )
 }
@@ -223,6 +224,16 @@ const App = () => {
     const [searchValue, setSearchValue] = useState(null);
     const [tooltipMsg, setTooltipMsg] = useState('Copy_URL');
     const [homeUrl, setHomeUrl] = useState('/');
+    const [libraries, setLibraries] = useState([]);
+
+
+
+    useEffect(() => {
+        axios.get('https://cdns-ad86e-default-rtdb.firebaseio.com/libraries.json').then((res) => {
+            setLibraries(res.data);
+        });
+    }, []);
+
     const clipboard = new ClipboardJS('.copyUrlBtn');
 
     clipboard.on('success', function (e) {
@@ -250,7 +261,7 @@ const App = () => {
         handleHomePageRedirection();
     }, []);
 
-    const contextValues = { inputRef, searchValue, setSearchValue, homeUrl,tooltipMsg, setTooltipMsg };
+    const contextValues = { inputRef, searchValue, setSearchValue, homeUrl,tooltipMsg, setTooltipMsg,libraries};
 
     return (<>
         <libraryContext.Provider value={contextValues}>
