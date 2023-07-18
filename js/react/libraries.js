@@ -1,4 +1,4 @@
-const { useRef,useState, useEffect, createContext,useContext } = React;
+const { useRef, useState, useEffect, createContext, useContext } = React;
 
 const libraryContext = createContext({});
 
@@ -8,28 +8,31 @@ const items = [
         name: 'tailwindcss',
         version: '3.3.3',
         description: 'A utility-first CSS framework for rapidly building custom user interfaces.',
-        tags: ['tailwindcss', 'css']
+        tags: ['tailwindcss', 'css'],
+        url: 'https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/3.3.3/tailwind.min.css'
     },
     {
         id: 2,
         name: 'tailwindcss-paddings',
         version: '3.3.3',
         description: 'A utility-first CSS framework for rapidly building custom user interfaces.',
-        tags: ['tailwindcss', 'css', 'paddings']
+        tags: ['tailwindcss', 'css', 'paddings'],
+        url: 'https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/3.3.3/tailwind.min.css'
     },
     {
         id: 3,
         name: 'tailwindcss-margins',
         version: '3.3.3',
         description: 'A utility-first CSS framework for rapidly building custom user interfaces.',
-        tags: ['tailwindcss', 'css', 'margins']
-    },
+        tags: ['tailwindcss', 'css', 'margins'],
+        url: 'https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/3.3.3/tailwind.min.css'
+    }
 ];
 
 
 
 const Header = () => {
-    const {homeUrl} = useContext(libraryContext);
+    const { homeUrl } = useContext(libraryContext);
     return (
         <div className="bg-[#343535] h-20 w-full sticky top-0 z-30">
             <div className="flex justify-between w-10/12 m-auto items-center">
@@ -74,8 +77,8 @@ const Header = () => {
 
 const BootcampAndSearch = () => {
 
-    const { inputRef ,setSearchValue,homeUrl} = useContext(libraryContext);
-   
+    const { inputRef, setSearchValue, homeUrl } = useContext(libraryContext);
+
 
     const handleInput = () => {
         setSearchValue(inputRef.current.value);
@@ -88,7 +91,7 @@ const BootcampAndSearch = () => {
                 <div>
                     <h2 className="text-2xl py-10">
                         <a href={homeUrl}
-                            className="text-[#D9643A] hover:text-[#BC4C2B] font-normal cdnHome">Home</a>
+                            className="text-[#D9643A] hover:text-[#BC4C2B] font-normal">Home</a>
                         <span className="text-white font-semibold text-3xl mx-2">/</span>
                         <a href="/libraries.html"
                             className="text-[#D9643A] hover:text-[#BC4C2B] font-normal">Libraries</a>
@@ -113,11 +116,19 @@ const BootcampAndSearch = () => {
 }
 
 const Library = () => {
+
+    const [libraries, setLibraries] = useState([]);
+    useEffect(() => {
+        axios.get('https://cdns-ad86e-default-rtdb.firebaseio.com/libraries.json').then((res) => {
+            setLibraries(res.data);
+        });
+    },[]);
+
     return (<div className="bg-[#454647] w-full h-screen pb-10">
         <div className="w-8/12 mx-auto pt-10">
             <div className="grid grid-cols-1 3xl:grid-cols-2 gap-6">
                 {
-                    items.map((item, index) => {
+                    libraries.length > 0 &&  libraries.map((item, index) => {
                         return (<LibraryBox key={index} item={item} />)
                     })
                 }
@@ -128,13 +139,14 @@ const Library = () => {
 
 const LibraryBox = ({ item }) => {
 
-    const { name, version, description, tags } = item;
+    const { name, version, description, tags, url } = item;
 
-    const {searchValue} = useContext(libraryContext);
-    const [isSearch,setIsSearch] = useState(true);
+    const { searchValue, clickInput } = useContext(libraryContext);
+    const [isSearch, setIsSearch] = useState(true);
+
 
     useEffect(() => {
-        searchValue == '' && setIsSearch(true);
+        searchValue === '' && setIsSearch(true);
         if (searchValue) {
             tags.map((tag) => {
                 if (tag.includes(searchValue)) {
@@ -146,7 +158,9 @@ const LibraryBox = ({ item }) => {
         }
     }, [searchValue]);
 
-        
+    const urlWithTags = `<script src=${url}></script>`
+
+
 
     return (
         <div className={`bg-[#343535] h-32 ${isSearch == false && 'hidden'}`}>
@@ -157,9 +171,9 @@ const LibraryBox = ({ item }) => {
                 </div>
                 <div className="text-xl font-semibold space-x-1 pr-2">
                     <i
-                        className="fa-solid fa-link cursor-pointer text-white hover:text-gray-400 px-1"></i>
+                        className="fa-solid fa-link cursor-pointer text-white hover:text-gray-400 px-1 copyUrlBtn" data-clipboard-text={url}></i>
                     <i
-                        className="fa-solid fa-code cursor-pointer text-white hover:text-gray-400 px-1"></i>
+                        className="fa-solid fa-code cursor-pointer text-white hover:text-gray-400 px-1 copyUrlBtn" data-clipboard-text={urlWithTags}></i>
                     <i
                         className="fa-solid fa-eye cursor-pointer text-white hover:text-gray-400 px-1"></i>
                 </div>
@@ -189,30 +203,32 @@ const App = () => {
 
 
     const inputRef = useRef(null);
-    const [searchValue,setSearchValue] = useState(null);
-    const [homeUrl,setHomeUrl] = useState('/');
+    const [searchValue, setSearchValue] = useState(null);
+    const [homeUrl, setHomeUrl] = useState('/');
 
-    
+
     const handleHomePageRedirection = () => {
         const currentLocation = window.location.href;
         const pageIndex = currentLocation.indexOf('github');
-        if(pageIndex !== -1) {
+        if (pageIndex !== -1) {
             setHomeUrl('/cdns/');
-        }else{
+        } else {
             setHomeUrl('/');
         }
     };
 
+
+
     useEffect(() => {
         handleHomePageRedirection();
-    },[]);
+    }, []);
 
-    const contextValues =  {inputRef, searchValue, setSearchValue,homeUrl};
+    const contextValues = { inputRef, searchValue, setSearchValue, homeUrl };
 
     return (<>
         <libraryContext.Provider value={contextValues}>
             <Header />
-            <BootcampAndSearch/>
+            <BootcampAndSearch />
             <Library />
         </libraryContext.Provider>
     </>);

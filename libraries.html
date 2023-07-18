@@ -33,10 +33,14 @@
             src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
             crossorigin></script>
         <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     </head>
     <body>
         <div id="library"></div>
-        <script src="./js/app.js" type="module"></script>
         <script type="text/babel" src="./js/react/libraries.js"></script>
+        <script src="./assets/dist/js/clipboard.min.js"></script>
+        <script>
+            new ClipboardJS('.copyUrlBtn');
+        </script>
     </body>
 </html>
