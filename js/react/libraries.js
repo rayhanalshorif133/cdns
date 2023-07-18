@@ -29,11 +29,12 @@ const items = [
 
 
 const Header = () => {
+    const {homeUrl} = useContext(libraryContext);
     return (
         <div className="bg-[#343535] h-20 w-full sticky top-0 z-30">
             <div className="flex justify-between w-10/12 m-auto items-center">
                 <div className="flex">
-                    <a href="/"
+                    <a href={homeUrl}
                         className="text-5xl font-semibold text-slate-100 mt-1 cdnHome">
                         <i className="fa-solid fa-chevron-left text-gray-400"></i><span
                             className="text-red-400">cdn</span>s<i
@@ -73,18 +74,20 @@ const Header = () => {
 
 const BootcampAndSearch = () => {
 
-    const { inputRef ,setSearchValue} = useContext(libraryContext);
+    const { inputRef ,setSearchValue,homeUrl} = useContext(libraryContext);
+   
 
     const handleInput = () => {
         setSearchValue(inputRef.current.value);
     }
+
 
     return (
         <div className="bg-[#3A3C3C] w-full py-3">
             <div className="w-10/12 m-auto items-center">
                 <div>
                     <h2 className="text-2xl py-10">
-                        <a href="/"
+                        <a href={homeUrl}
                             className="text-[#D9643A] hover:text-[#BC4C2B] font-normal cdnHome">Home</a>
                         <span className="text-white font-semibold text-3xl mx-2">/</span>
                         <a href="/libraries.html"
@@ -112,7 +115,7 @@ const BootcampAndSearch = () => {
 const Library = () => {
     return (<div className="bg-[#454647] w-full h-screen pb-10">
         <div className="w-8/12 mx-auto pt-10">
-            <div className="grid grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 3xl:grid-cols-2 gap-6">
                 {
                     items.map((item, index) => {
                         return (<LibraryBox key={index} item={item} />)
@@ -126,20 +129,27 @@ const Library = () => {
 const LibraryBox = ({ item }) => {
 
     const { name, version, description, tags } = item;
-    const tagRef = useRef(null);
 
     const {searchValue} = useContext(libraryContext);
+    const [isSearch,setIsSearch] = useState(true);
 
     useEffect(() => {
+        searchValue == '' && setIsSearch(true);
         if (searchValue) {
-            console.log(searchValue);
+            tags.map((tag) => {
+                if (tag.includes(searchValue)) {
+                    setIsSearch(true);
+                } else {
+                    setIsSearch(false);
+                }
+            })
         }
     }, [searchValue]);
 
         
 
     return (
-        <div className="bg-[#343535] h-32">
+        <div className={`bg-[#343535] h-32 ${isSearch == false && 'hidden'}`}>
             <div className="flex justify-between px-5 py-3">
                 <div className="text-cdnColor">
                     <span className="text-2xl font-semibold">{name}</span>
@@ -161,7 +171,7 @@ const LibraryBox = ({ item }) => {
                     {
                         tags.map((tag, index) => {
                             return (
-                                <span key={index} className="ml-2" ref={tagRef}>{tag}
+                                <span key={index} className="ml-2">{tag}
                                     {
                                         index < tags.length - 1 ? ',' : ''
                                     }
@@ -180,8 +190,24 @@ const App = () => {
 
     const inputRef = useRef(null);
     const [searchValue,setSearchValue] = useState(null);
+    const [homeUrl,setHomeUrl] = useState('/');
 
-    const contextValues =  {inputRef, searchValue, setSearchValue};
+    
+    const handleHomePageRedirection = () => {
+        const currentLocation = window.location.href;
+        const pageIndex = currentLocation.indexOf('github');
+        if(pageIndex !== -1) {
+            setHomeUrl('/cdns/');
+        }else{
+            setHomeUrl('/');
+        }
+    };
+
+    useEffect(() => {
+        handleHomePageRedirection();
+    },[]);
+
+    const contextValues =  {inputRef, searchValue, setSearchValue,homeUrl};
 
     return (<>
         <libraryContext.Provider value={contextValues}>
