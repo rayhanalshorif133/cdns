@@ -45,7 +45,7 @@ const Header = () => {
                         <a href="#"
                             className="rounded-lg px-3 py-2 text-xl font-bold text-slate-100">About</a>
                         <a href="./libraries.html"
-                            className="rounded-lg px-3 py-2 text-xl font-bold text-slate-100">Libraries</a>
+                            className="rounded-lg px-3 py-2 text-xl font-bold text-slate-400">Libraries</a>
                         <a href="#"
                             className="rounded-lg px-3 py-2 text-xl font-bold text-slate-100">API</a>
                         <a href="#"
