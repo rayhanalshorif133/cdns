@@ -77,7 +77,7 @@ const Header = () => {
 
 const BootcampAndSearch = () => {
 
-    const { inputRef, setSearchValue, homeUrl,libraries } = useContext(libraryContext);
+    const { inputRef, setSearchValue, homeUrl,libraries,fetchTime } = useContext(libraryContext);
 
 
     const handleInput = () => {
@@ -110,7 +110,9 @@ const BootcampAndSearch = () => {
             </div>
             <div className="flex justify-center mx-auto">
                 <h3 className="text-lg text-[#8EA6A6] text-semibold py-2">
-                    {libraries.length > 0? <span className="text-cdnColor font-semibold">{libraries.length}</span> : "Many"} libraries found in 1ms.</h3>
+                    {libraries.length > 0? <span className="text-cdnColor font-semibold">{libraries.length}</span> : "Many"} libraries found in {fetchTime}{
+                        fetchTime > 1 ? "s" : "ms"
+                    }.</h3>
             </div>
         </div>);
 }
@@ -153,7 +155,6 @@ const LibraryBox = ({ item }) => {
         }
     }, [searchValue]);
 
-    // <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
     // get url extension
     const urlExtension = url.split('.').pop();
@@ -225,13 +226,17 @@ const App = () => {
     const [tooltipMsg, setTooltipMsg] = useState('Copy_URL');
     const [homeUrl, setHomeUrl] = useState('/');
     const [libraries, setLibraries] = useState([]);
+    const [fetchTime, setFetchTime] = useState(Date.now());
 
-
-
-    useEffect(() => {
-        axios.get('https://cdns-ad86e-default-rtdb.firebaseio.com/libraries.json').then((res) => {
+    const fetchData = async () => {
+        await axios.get('https://cdns-ad86e-default-rtdb.firebaseio.com/libraries.json').then((res) => {
             setLibraries(res.data);
+            const secSpent = (Date.now() - fetchTime) / 1000;
+            setFetchTime(secSpent);
         });
+    }
+    useEffect(() => {
+        fetchData();
     }, []);
 
     const clipboard = new ClipboardJS('.copyUrlBtn');
@@ -261,7 +266,7 @@ const App = () => {
         handleHomePageRedirection();
     }, []);
 
-    const contextValues = { inputRef, searchValue, setSearchValue, homeUrl,tooltipMsg, setTooltipMsg,libraries};
+    const contextValues = { inputRef, searchValue, setSearchValue, homeUrl,tooltipMsg, setTooltipMsg,libraries,fetchTime};
 
     return (<>
         <libraryContext.Provider value={contextValues}>
