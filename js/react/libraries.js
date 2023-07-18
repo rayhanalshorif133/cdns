@@ -122,13 +122,13 @@ const Library = () => {
         axios.get('https://cdns-ad86e-default-rtdb.firebaseio.com/libraries.json').then((res) => {
             setLibraries(res.data);
         });
-    },[]);
+    }, []);
 
     return (<div className="bg-[#454647] w-full h-screen pb-10">
         <div className="w-8/12 mx-auto pt-10">
             <div className="grid grid-cols-1 3xl:grid-cols-2 gap-6">
                 {
-                    libraries.length > 0 &&  libraries.map((item, index) => {
+                    libraries.length > 0 && libraries.map((item, index) => {
                         return (<LibraryBox key={index} item={item} />)
                     })
                 }
@@ -141,7 +141,7 @@ const LibraryBox = ({ item }) => {
 
     const { name, version, description, tags, url } = item;
 
-    const { searchValue, clickInput } = useContext(libraryContext);
+    const { searchValue, tooltipMsg } = useContext(libraryContext);
     const [isSearch, setIsSearch] = useState(true);
 
 
@@ -169,13 +169,18 @@ const LibraryBox = ({ item }) => {
                     <span className="text-2xl font-semibold">{name}</span>
                     <span className="text-base"> @{version}</span>
                 </div>
-                <div className="text-xl font-semibold space-x-1 pr-2">
-                    <i
-                        className="fa-solid fa-link cursor-pointer text-white hover:text-gray-400 px-1 copyUrlBtn" data-clipboard-text={url}></i>
-                    <i
-                        className="fa-solid fa-code cursor-pointer text-white hover:text-gray-400 px-1 copyUrlBtn" data-clipboard-text={urlWithTags}></i>
-                    <i
-                        className="fa-solid fa-eye cursor-pointer text-white hover:text-gray-400 px-1"></i>
+                <div className="text-xl font-semibold space-x-1 pr-2 flex">
+                    <Tooltip message={tooltipMsg}>
+                        <i className="fa-solid fa-link cursor-pointer text-white hover:text-gray-400 px-1 copyUrlBtn" data-clipboard-text={url}></i>
+                    </Tooltip>
+                    <Tooltip message={tooltipMsg}>
+                        <i
+                            className="fa-solid fa-code cursor-pointer text-white hover:text-gray-400 px-1 copyUrlBtn" data-clipboard-text={urlWithTags}></i>
+                    </Tooltip>
+                    <Tooltip message={'See_more'}>
+                        <i
+                            className="fa-solid fa-eye cursor-pointer text-white hover:text-gray-400 px-1"></i>
+                    </Tooltip>
                 </div>
             </div>
             <div className="px-5">
@@ -199,12 +204,34 @@ const LibraryBox = ({ item }) => {
     );
 };
 
+
+function Tooltip({ message, children }) {
+    return (
+        <div class="group relative flex">
+            {children}
+            <span class="absolute top-10 scale-0 w-50 transition-all rounded bg-gray-800 p-2 text-sm text-white group-hover:scale-100">{message}</span>
+        </div>
+    )
+}
+
+
+
 const App = () => {
 
 
     const inputRef = useRef(null);
     const [searchValue, setSearchValue] = useState(null);
+    const [tooltipMsg, setTooltipMsg] = useState('Copy_URL');
     const [homeUrl, setHomeUrl] = useState('/');
+    const clipboard = new ClipboardJS('.copyUrlBtn');
+
+    clipboard.on('success', function (e) {
+        setTooltipMsg('Copied!');
+        setTimeout(() => {
+            setTooltipMsg('Copy_URL');
+        }, 1000);
+        e.clearSelection();
+    });
 
 
     const handleHomePageRedirection = () => {
@@ -223,7 +250,7 @@ const App = () => {
         handleHomePageRedirection();
     }, []);
 
-    const contextValues = { inputRef, searchValue, setSearchValue, homeUrl };
+    const contextValues = { inputRef, searchValue, setSearchValue, homeUrl,tooltipMsg, setTooltipMsg };
 
     return (<>
         <libraryContext.Provider value={contextValues}>
