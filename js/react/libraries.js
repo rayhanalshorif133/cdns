@@ -138,23 +138,7 @@ const LibraryBox = ({ item }) => {
 
     const { name, version, description, tags, url } = item;
 
-    const { searchValue, tooltipMsg } = useContext(libraryContext);
-    const [isSearch, setIsSearch] = useState(true);
-
-
-    useEffect(() => {
-        searchValue === '' && setIsSearch(true);
-        if (searchValue) {
-            tags.map((tag) => {
-                if (tag.includes(searchValue)) {
-                    setIsSearch(true);
-                } else {
-                    setIsSearch(false);
-                }
-            })
-        }
-    }, [searchValue]);
-
+    const { tooltipMsg } = useContext(libraryContext);
 
     // get url extension
     const urlExtension = url.split('.').pop();
@@ -165,7 +149,7 @@ const LibraryBox = ({ item }) => {
         urlWithTags = `<script src=${url}></script>`;
     }
     return (
-        <div className={`bg-[#343535] h-32 ${isSearch == false && 'hidden'}`}>
+        <div className="bg-[#343535] h-32">
             <div className="flex justify-between px-5 py-3">
                 <div className="text-cdnColor">
                     <span className="text-2xl font-semibold">{name}</span>
@@ -234,7 +218,25 @@ const App = () => {
             const secSpent = (Date.now() - fetchTime) / 1000;
             setFetchTime(secSpent);
         });
+    } 
+    
+    const handleSearchValue = async () => {
+        await axios.get('https://cdns-ad86e-default-rtdb.firebaseio.com/libraries.json').then((res) => {
+            const libraries = res.data;
+            const filteredLibraries = libraries.filter((item) => {
+                return item.tags.includes(searchValue);
+            });
+            if (searchValue === '') {
+                fetchData();
+            }
+            setLibraries(filteredLibraries);
+        });
+
     }
+    useEffect(() => {
+       handleSearchValue();
+    }, [searchValue]);
+    
     useEffect(() => {
         fetchData();
     }, []);
