@@ -2,37 +2,17 @@ const { useRef, useState, useEffect, createContext, useContext } = React;
 
 const libraryContext = createContext({});
 
-const items = [
-    {
-        id: 1,
-        name: 'tailwindcss',
-        version: '3.3.3',
-        description: 'A utility-first CSS framework for rapidly building custom user interfaces.',
-        tags: ['tailwindcss', 'css'],
-        url: 'https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/3.3.3/tailwind.min.css'
-    },
-    {
-        id: 2,
-        name: 'tailwindcss-paddings',
-        version: '3.3.3',
-        description: 'A utility-first CSS framework for rapidly building custom user interfaces.',
-        tags: ['tailwindcss', 'css', 'paddings'],
-        url: 'https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/3.3.3/tailwind.min.css'
-    },
-    {
-        id: 3,
-        name: 'tailwindcss-margins',
-        version: '3.3.3',
-        description: 'A utility-first CSS framework for rapidly building custom user interfaces.',
-        tags: ['tailwindcss', 'css', 'margins'],
-        url: 'https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/3.3.3/tailwind.min.css'
-    }
-];
-
 
 
 const Header = () => {
     const { homeUrl } = useContext(libraryContext);
+
+    const [isSplitNav, setIsSplitNav] = useState(false);
+
+    const handleMobileNavBtn = () => {
+        setIsSplitNav(!isSplitNav);
+    }
+
     return (
         <div className="bg-[#343535] h-20 w-full sticky top-0 z-30">
             <div className="flex justify-between w-10/12 m-auto items-center">
@@ -44,7 +24,7 @@ const Header = () => {
                                 className="fa-solid fa-chevron-right text-gray-400"></i></a>
                 </div>
                 <div className="flex">
-                    <nav className="flex justify-center space-x-3 my-auto mt-4">
+                    <nav className="hidden xl:flex justify-center space-x-3 my-auto mt-4">
                         <a href="#"
                             className="rounded-lg px-3 py-2 text-xl font-bold text-slate-100">About</a>
                         <a href="./libraries.html"
@@ -67,8 +47,44 @@ const Header = () => {
                             </div>
                         </a>
                     </nav>
+                    <nav className="flex xl:hidden justify-center space-x-3 my-auto mt-4">
+                        <a href="#" className="rounded-lg px-3 py-2 text-xl font-bold text-slate-100" onClick={handleMobileNavBtn}>
+                            <i class="fa-solid fa-bars text-xl"></i>
+                        </a>
+                    </nav>
+                    {
+                        isSplitNav == true && <MobileNav />
+                    }
                 </div>
             </div>
+        </div>
+    );
+}
+
+const MobileNav = () => {
+    return (
+        <div className="xl:hidden justify-start flex flex-col absolute bg-gray-800 w-full h-auto right-0 top-20 transition ease-in-out delay-150">
+            <a href="#"
+                className="rounded-lg px-7 py-4 text-xl font-bold text-slate-100">About</a>
+            <a href="./libraries.html"
+                className="rounded-lg px-7 py-4 text-xl font-bold text-slate-400">Libraries</a>
+            <a href="#"
+                className="rounded-lg px-7 py-4 text-xl font-bold text-slate-100">API</a>
+            <a href="#"
+                className="rounded-lg px-7 py-4 text-xl font-bold text-slate-100">GitHub</a>
+            <a href="#"
+                className="rounded-lg px-7 py-4 text-xl font-bold text-slate-100">
+                <div
+                    className="flex flex justify-start items-start m-auto">
+                    <div>Status</div>
+                    <span className="relative flex h-3 w-3 mx-3 mt-2">
+                        <span
+                            className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75"></span>
+                        <span
+                            className="relative inline-flex rounded-full h-3 w-3 bg-green-600"></span>
+                    </span>
+                </div>
+            </a>
         </div>
     );
 }
@@ -77,7 +93,7 @@ const Header = () => {
 
 const BootcampAndSearch = () => {
 
-    const { inputRef, setSearchValue, homeUrl,libraries,fetchTime } = useContext(libraryContext);
+    const { inputRef, setSearchValue, homeUrl, libraries, fetchTime } = useContext(libraryContext);
 
 
     const handleInput = () => {
@@ -110,7 +126,7 @@ const BootcampAndSearch = () => {
             </div>
             <div className="flex justify-center mx-auto">
                 <h3 className="text-lg text-[#8EA6A6] text-semibold py-2">
-                    {libraries.length > 0? <span className="text-cdnColor font-semibold">{libraries.length}</span> : "Many"} libraries found in {fetchTime}{
+                    {libraries.length > 0 ? <span className="text-cdnColor font-semibold">{libraries.length}</span> : "Many"} libraries found in {fetchTime}{
                         fetchTime > 1 ? "s" : "ms"
                     }.</h3>
             </div>
@@ -119,10 +135,10 @@ const BootcampAndSearch = () => {
 
 const Library = () => {
 
-    const {libraries} = useContext(libraryContext);    
+    const { libraries } = useContext(libraryContext);
 
     return (<div className="bg-[#454647] w-full h-screen pb-10">
-        <div className="w-8/12 mx-auto pt-10">
+        <div className="w-11/12 xl:w-8/12 mx-auto pt-6 xl:pt-10">
             <div className="grid grid-cols-1 3xl:grid-cols-2 gap-6">
                 {
                     libraries.length > 0 && libraries.map((item, index) => {
@@ -143,13 +159,13 @@ const LibraryBox = ({ item }) => {
     // get url extension
     const urlExtension = url.split('.').pop();
     var urlWithTags = "";
-    if(urlExtension === 'css') {
+    if (urlExtension === 'css') {
         urlWithTags = `<link href=${url} rel="stylesheet">`;
-    }else {
+    } else {
         urlWithTags = `<script src=${url}></script>`;
     }
     return (
-        <div className="bg-[#343535] h-32">
+        <div className="bg-[#343535] h-32 md:h-auto md:py-2 md:w-full">
             <div className="flex justify-between px-5 py-3">
                 <div className="text-cdnColor">
                     <span className="text-2xl font-semibold">{name}</span>
@@ -218,8 +234,8 @@ const App = () => {
             const secSpent = (Date.now() - fetchTime) / 1000;
             setFetchTime(secSpent);
         });
-    } 
-    
+    }
+
     const handleSearchValue = async () => {
         await axios.get('https://cdns-ad86e-default-rtdb.firebaseio.com/libraries.json').then((res) => {
             const libraries = res.data;
@@ -234,9 +250,9 @@ const App = () => {
 
     }
     useEffect(() => {
-       handleSearchValue();
+        handleSearchValue();
     }, [searchValue]);
-    
+
     useEffect(() => {
         fetchData();
     }, []);
@@ -268,7 +284,7 @@ const App = () => {
         handleHomePageRedirection();
     }, []);
 
-    const contextValues = { inputRef, searchValue, setSearchValue, homeUrl,tooltipMsg, setTooltipMsg,libraries,fetchTime};
+    const contextValues = { inputRef, searchValue, setSearchValue, homeUrl, tooltipMsg, setTooltipMsg, libraries, fetchTime };
 
     return (<>
         <libraryContext.Provider value={contextValues}>
