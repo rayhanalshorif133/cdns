@@ -1,3 +1,7 @@
+const { useRef,useState, useEffect, createContext,useContext } = React;
+
+const libraryContext = createContext({});
+
 const items = [
     {
         id: 1,
@@ -21,6 +25,7 @@ const items = [
         tags: ['tailwindcss', 'css', 'margins']
     },
 ];
+
 
 
 const Header = () => {
@@ -67,6 +72,13 @@ const Header = () => {
 
 
 const BootcampAndSearch = () => {
+
+    const { inputRef ,setSearchValue} = useContext(libraryContext);
+
+    const handleInput = () => {
+        setSearchValue(inputRef.current.value);
+    }
+
     return (
         <div className="bg-[#3A3C3C] w-full py-3">
             <div className="w-10/12 m-auto items-center">
@@ -85,7 +97,7 @@ const BootcampAndSearch = () => {
                     <input
                         className="border-2 border-gray-300 bg-white h-14 px-5 pr-16 w-full rounded-lg text-xl focus:outline-none placeholder:text-gray-700 placeholder:font-normal"
                         type="search" name="search"
-                        placeholder="Search for cdns" />
+                        placeholder="Search for cdns" ref={inputRef} onChange={handleInput} />
                     <i
                         className="fas fa-search text-xl absolute right-5 top-[50%] text-gray-700"></i>
                 </div>
@@ -99,21 +111,32 @@ const BootcampAndSearch = () => {
 
 const Library = () => {
     return (<div className="bg-[#454647] w-full h-screen pb-10">
-    <div className="w-8/12 mx-auto pt-10">
-        <div className="grid grid-cols-2 gap-6">
-            {
-                items.map((item, index) => {
-                    return (<LibraryBox key={index} item={item} />)
-                })
-            }
+        <div className="w-8/12 mx-auto pt-10">
+            <div className="grid grid-cols-2 gap-6">
+                {
+                    items.map((item, index) => {
+                        return (<LibraryBox key={index} item={item} />)
+                    })
+                }
+            </div>
         </div>
-    </div>
-</div>)
+    </div>)
 }
 
 const LibraryBox = ({ item }) => {
 
     const { name, version, description, tags } = item;
+    const tagRef = useRef(null);
+
+    const {searchValue} = useContext(libraryContext);
+
+    useEffect(() => {
+        if (searchValue) {
+            console.log(searchValue);
+        }
+    }, [searchValue]);
+
+        
 
     return (
         <div className="bg-[#343535] h-32">
@@ -138,7 +161,7 @@ const LibraryBox = ({ item }) => {
                     {
                         tags.map((tag, index) => {
                             return (
-                                <span key={index} className="ml-2">{tag}
+                                <span key={index} className="ml-2" ref={tagRef}>{tag}
                                     {
                                         index < tags.length - 1 ? ',' : ''
                                     }
@@ -152,14 +175,20 @@ const LibraryBox = ({ item }) => {
     );
 };
 
-
-
-
 const App = () => {
+
+
+    const inputRef = useRef(null);
+    const [searchValue,setSearchValue] = useState(null);
+
+    const contextValues =  {inputRef, searchValue, setSearchValue};
+
     return (<>
-        <Header />
-        <BootcampAndSearch />
-        <Library />
+        <libraryContext.Provider value={contextValues}>
+            <Header />
+            <BootcampAndSearch/>
+            <Library />
+        </libraryContext.Provider>
     </>);
 }
 
