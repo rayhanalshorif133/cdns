@@ -33,7 +33,7 @@ const Header = () => {
                         <a href="#"
                             className="rounded-lg px-3 py-2 text-xl font-bold text-slate-100">GitHub</a>
                          <a href="./playground.html"
-                            class="rounded-lg px-3 py-2 text-xl font-semibold text-slate-100">Playground</a>
+                            className="rounded-lg px-3 py-2 text-xl font-semibold text-slate-100">Playground</a>
                         <a href="#"
                             className="rounded-lg px-3 py-2 text-xl font-bold text-slate-100">
                             <div
@@ -50,7 +50,7 @@ const Header = () => {
                     </nav>
                     <nav className="flex xl:hidden justify-center space-x-3 my-auto mt-4">
                         <a href="#" className="rounded-lg px-3 py-2 text-xl font-bold text-slate-100" onClick={handleMobileNavBtn}>
-                            <i class="fa-solid fa-bars text-xl"></i>
+                            <i className="fa-solid fa-bars text-xl"></i>
                         </a>
                     </nav>
                     {
