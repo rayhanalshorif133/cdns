@@ -33,6 +33,8 @@ const Header = () => {
                             className="rounded-lg px-3 py-2 text-xl font-bold text-slate-100">API</a>
                         <a href="#"
                             className="rounded-lg px-3 py-2 text-xl font-bold text-slate-100">GitHub</a>
+                         <a href="./playground.html"
+                            class="rounded-lg px-3 py-2 text-xl font-semibold text-slate-100">Playground</a>
                         <a href="#"
                             className="rounded-lg px-3 py-2 text-xl font-bold text-slate-100">
                             <div
@@ -72,6 +74,8 @@ const MobileNav = () => {
                 className="rounded-lg px-7 py-4 text-xl font-bold text-slate-100">API</a>
             <a href="#"
                 className="rounded-lg px-7 py-4 text-xl font-bold text-slate-100">GitHub</a>
+            <a href="./playground.html"
+                            class="rounded-lg px-7 py-4 text-xl font-bold text-slate-100">Playground</a>
             <a href="#"
                 className="rounded-lg px-7 py-4 text-xl font-bold text-slate-100">
                 <div
