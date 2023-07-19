@@ -15,7 +15,7 @@ const Header = () => {
 
     return (
         <div className="bg-[#343535] h-20 w-full sticky top-0 z-30">
-            <div className="flex justify-between w-10/12 m-auto items-center">
+            <div className="flex justify-between w-11/12 m-auto items-center">
                 <div className="flex">
                     <a href={homeUrl}
                         className="text-5xl font-semibold text-slate-100 mt-1 cdnHome">
@@ -141,9 +141,9 @@ const Library = () => {
 
     const { libraries } = useContext(libraryContext);
 
-    return (<div className="bg-[#454647] w-full h-screen pb-10">
-        <div className="w-11/12 xl:w-8/12 mx-auto pt-6 xl:pt-10">
-            <div className="grid grid-cols-1 3xl:grid-cols-2 gap-6">
+    return (<div className="bg-[#454647] w-full h-auto pb-10">
+        <div className="w-11/12 xl:w-10/12 w-7/12 mx-auto pt-6 xl:pt-10">
+            <div className="grid grid-cols-1 2xl:grid-cols-2 gap-4 3xl:gap-6">
                 {
                     libraries.length > 0 && libraries.map((item, index) => {
                         return (<LibraryBox key={index} item={item} />)
@@ -169,7 +169,7 @@ const LibraryBox = ({ item }) => {
         urlWithTags = `<script src=${url}></script>`;
     }
     return (
-        <div className="bg-[#343535] h-32 md:h-auto md:py-2 md:w-full">
+        <div className="bg-[#343535] h-32 md:h-auto md:py-2 xl:py-2 md:w-full 2xl:w-full">
             <div className="flex justify-between px-5 py-3">
                 <div className="text-cdnColor">
                     <span className="text-2xl font-semibold">{name}</span>
