@@ -7,7 +7,7 @@
 
 var styledBody = '';
 // find all mt- * Margin Top
-var marginTops = document.querySelectorAll('[class^="mt-"]');
+var marginTops = document.querySelectorAll('[class*="mt-"]');
 marginTops.forEach((mt) => {
     var marginTopClass = mt.className.split(' ');
     marginTopClass.forEach((mtClass) => {
@@ -51,6 +51,5 @@ function justNumbers(string) {
 }
 
 
-console.log(styledBody);
 const styled = `<style type="text/css">${styledBody}</style>`;
 $('head').append(styled);

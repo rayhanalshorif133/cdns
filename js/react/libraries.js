@@ -179,7 +179,7 @@ const LibraryBox = ({ item }) => {
                     <Tooltip message={tooltipMsg}>
                         <i className="fa-solid fa-link cursor-pointer text-white hover:text-gray-400 px-1 copyUrlBtn" data-clipboard-text={url}></i>
                     </Tooltip>
-                    <Tooltip message={tooltipMsg}>
+                    <Tooltip message={'Copy_Script_Tag'}>
                         <i
                             className="fa-solid fa-code cursor-pointer text-white hover:text-gray-400 px-1 copyUrlBtn" data-clipboard-text={urlWithTags}></i>
                     </Tooltip>

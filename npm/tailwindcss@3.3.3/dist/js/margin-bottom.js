@@ -1,6 +1,6 @@
 // get all mb-
 var styledBody = '';
 
-var body = document.getElementsByTagName('body');
+var marginBottoms = document.querySelectorAll('[class*="mb-"]');
 
-console.log(body);
+console.log(marginBottoms);
