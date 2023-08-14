@@ -6,6 +6,47 @@
 */
 
 var styledBody = '';
+
+// find all m- * Margin Top
+var margins = document.querySelectorAll('[class*="m-"]');
+margins.forEach((m) => {
+    var marginClass = m.className.split(' ');
+    marginClass.forEach((mClass) => {
+        if (mClass.includes('m-[')) {
+            const dotClassName = getDotClassName(mClass);
+            const numberWithExtension = getNumberWithExtension(mClass);
+            styledBody += `.${dotClassName} {margin: ${numberWithExtension}!important;}`;
+        }
+    });
+});
+
+
+// find all mx- * Margin Top
+var marginLeftRights = document.querySelectorAll('[class*="mx-"]');
+marginLeftRights.forEach((mx) => {
+    var marginClass = mx.className.split(' ');
+    marginClass.forEach((mxClass) => {
+        if (mxClass.includes('mx-[')) {
+            const dotClassName = getDotClassName(mxClass);
+            const numberWithExtension = getNumberWithExtension(mxClass);
+            styledBody += `.${dotClassName} {margin-left: ${numberWithExtension}!important;margin-right: ${numberWithExtension}!important;}`;
+        }
+    });
+});
+
+// find all mx- * Margin Top
+var marginTopBottoms = document.querySelectorAll('[class*="my-"]');
+marginTopBottoms.forEach((my) => {
+    var marginClass = my.className.split(' ');
+    marginClass.forEach((myClass) => {
+        if (myClass.includes('my-[')) {
+            const dotClassName = getDotClassName(myClass);
+            const numberWithExtension = getNumberWithExtension(myClass);
+            styledBody += `.${dotClassName} {margin-left: ${numberWithExtension}!important;margin-right: ${numberWithExtension}!important;}`;
+        }
+    });
+});
+
 // find all mt- * Margin Top
 var marginTops = document.querySelectorAll('[class*="mt-"]');
 marginTops.forEach((mt) => {
@@ -95,6 +136,6 @@ function justNumbers(string) {
     return parseInt(numsStr);
 }
 
-
+console.log(styledBody);
 let styled = `<style type="text/css">${styledBody}</style>`;
 $('head').append(styled);
