@@ -13,22 +13,9 @@
       "version": "3.3.3"
     },
     {
-      "description": "A utility-first CSS framework for rapidly building custom user interfaces.",
+      "description": "Tailwindcss margin dynamic EX: mt-[3rem] , mb-[3rem] , ml-[3rem] , mr-[3rem]  😊",
       "id": 1,
-      "name": "tailwindcss",
-      "show_url": "https://tailwindcss.com",
-      "tags": [
-        "tailwindcss",
-        "css",
-        "margins"
-      ],
-      "url": "https://cdn.tailwindcss.com",
-      "version": "3.3.3"
-    },
-    {
-      "description": "Tailwindcss margin top dynamic EX: mt-[3rem] 😊",
-      "id": 1,
-      "name": "tailwindcss-margin-top-dynamic",
+      "name": "tailwindcss-margin-dynamic",
       "show_url": "https://cdn.jsdelivr.net/gh/rayhanalshorif133/cdns/npm/tailwindcss@3.3.3/dist/js/margin.js",
       "tags": [
         "tailwindcss",

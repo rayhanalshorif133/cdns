@@ -141,7 +141,8 @@ const Library = () => {
 
     const { libraries } = useContext(libraryContext);
 
-    return (<div className="bg-[#454647] w-full h-auto pb-10">
+
+    return (<div className={`bg-[#454647] w-full ${libraries.length < 6? 'h-screen': 'h-auto'} pb-10`}>
         <div className="w-11/12 xl:w-10/12 w-7/12 mx-auto pt-6 xl:pt-10">
             <div className="grid grid-cols-1 2xl:grid-cols-2 gap-4 3xl:gap-6">
                 {
