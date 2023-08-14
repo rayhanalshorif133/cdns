@@ -21,6 +21,51 @@ marginTops.forEach((mt) => {
 
 // find all mb- * Margin Bottom
 
+var marginBottoms = document.querySelectorAll('[class*="mb-"]');
+
+marginBottoms.forEach((mb) => {
+    var marginTopClass = mb.className.split(' ');
+    marginTopClass.forEach((mbClass) => {
+        if (mbClass.includes('mb-[')) {
+            const dotClassName = getDotClassName(mbClass);
+            const numberWithExtension = getNumberWithExtension(mbClass);
+            styledBody += `.${dotClassName} {margin-bottom: ${numberWithExtension}!important;}`;
+        }
+    });
+});
+
+// find all ml- * Margin Bottom
+
+var marginBottoms = document.querySelectorAll('[class*="ml-"]');
+
+marginBottoms.forEach((ml) => {
+    var marginTopClass = ml.className.split(' ');
+    marginTopClass.forEach((mlClass) => {
+        if (mlClass.includes('ml-[')) {
+            const dotClassName = getDotClassName(mlClass);
+            const numberWithExtension = getNumberWithExtension(mlClass);
+            styledBody += `.${dotClassName} {margin-left: ${numberWithExtension}!important;}`;
+        }
+    });
+});
+
+// find all mr- * Margin Bottom
+
+var marginBottoms = document.querySelectorAll('[class*="mr-"]');
+
+marginBottoms.forEach((mr) => {
+    var marginTopClass = mr.className.split(' ');
+    marginTopClass.forEach((mrClass) => {
+        if (mrClass.includes('mr-[')) {
+            const dotClassName = getDotClassName(mrClass);
+            const numberWithExtension = getNumberWithExtension(mrClass);
+            styledBody += `.${dotClassName} {margin-right: ${numberWithExtension}!important;}`;
+        }
+    });
+});
+
+
+
 
 
 function getDotClassName(mtClass) {
@@ -51,5 +96,5 @@ function justNumbers(string) {
 }
 
 
-const styled = `<style type="text/css">${styledBody}</style>`;
+let styled = `<style type="text/css">${styledBody}</style>`;
 $('head').append(styled);
