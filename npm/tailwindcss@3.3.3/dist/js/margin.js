@@ -136,6 +136,5 @@ function justNumbers(string) {
     return parseInt(numsStr);
 }
 
-console.log(styledBody);
 let styled = `<style type="text/css">${styledBody}</style>`;
-$('head').append(styled);
+document.querySelectorAll('head')[0].innerHTML += styled;
