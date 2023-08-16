@@ -5,7 +5,7 @@
 * Description: This file is used to generate margin top classes
 */
 
-var styledBody = '';
+styledBody = '';
 
 // find all m- * Margin Top
 var margins = document.querySelectorAll('[class*="m-"]');
@@ -13,8 +13,8 @@ margins.forEach((m) => {
     var marginClass = m.className.split(' ');
     marginClass.forEach((mClass) => {
         if (mClass.includes('m-[')) {
-            const dotClassName = getDotClassName(mClass);
-            const numberWithExtension = getNumberWithExtension(mClass);
+            const dotClassName = marginGetDotClassName(mClass);
+            const numberWithExtension = marginGetNumberWithExtension(mClass);
             styledBody += `.${dotClassName} {margin: ${numberWithExtension}!important;}`;
         }
     });
@@ -27,8 +27,8 @@ marginLeftRights.forEach((mx) => {
     var marginClass = mx.className.split(' ');
     marginClass.forEach((mxClass) => {
         if (mxClass.includes('mx-[')) {
-            const dotClassName = getDotClassName(mxClass);
-            const numberWithExtension = getNumberWithExtension(mxClass);
+            const dotClassName = marginGetDotClassName(mxClass);
+            const numberWithExtension = marginGetNumberWithExtension(mxClass);
             styledBody += `.${dotClassName} {margin-left: ${numberWithExtension}!important;margin-right: ${numberWithExtension}!important;}`;
         }
     });
@@ -40,8 +40,8 @@ marginTopBottoms.forEach((my) => {
     var marginClass = my.className.split(' ');
     marginClass.forEach((myClass) => {
         if (myClass.includes('my-[')) {
-            const dotClassName = getDotClassName(myClass);
-            const numberWithExtension = getNumberWithExtension(myClass);
+            const dotClassName = marginGetDotClassName(myClass);
+            const numberWithExtension = marginGetNumberWithExtension(myClass);
             styledBody += `.${dotClassName} {margin-top: ${numberWithExtension}!important;margin-bottom: ${numberWithExtension}!important;}`;
         }
     });
@@ -53,8 +53,8 @@ marginTops.forEach((mt) => {
     var marginTopClass = mt.className.split(' ');
     marginTopClass.forEach((mtClass) => {
         if (mtClass.includes('mt-[')) {
-            const dotClassName = getDotClassName(mtClass);
-            const numberWithExtension = getNumberWithExtension(mtClass);
+            const dotClassName = marginGetDotClassName(mtClass);
+            const numberWithExtension = marginGetNumberWithExtension(mtClass);
             styledBody += `.${dotClassName} {margin-top: ${numberWithExtension}!important;}`;
         }
     });
@@ -68,8 +68,8 @@ marginBottoms.forEach((mb) => {
     var marginTopClass = mb.className.split(' ');
     marginTopClass.forEach((mbClass) => {
         if (mbClass.includes('mb-[')) {
-            const dotClassName = getDotClassName(mbClass);
-            const numberWithExtension = getNumberWithExtension(mbClass);
+            const dotClassName = marginGetDotClassName(mbClass);
+            const numberWithExtension = marginGetNumberWithExtension(mbClass);
             styledBody += `.${dotClassName} {margin-bottom: ${numberWithExtension}!important;}`;
         }
     });
@@ -83,8 +83,8 @@ marginBottoms.forEach((ml) => {
     var marginTopClass = ml.className.split(' ');
     marginTopClass.forEach((mlClass) => {
         if (mlClass.includes('ml-[')) {
-            const dotClassName = getDotClassName(mlClass);
-            const numberWithExtension = getNumberWithExtension(mlClass);
+            const dotClassName = marginGetDotClassName(mlClass);
+            const numberWithExtension = marginGetNumberWithExtension(mlClass);
             styledBody += `.${dotClassName} {margin-left: ${numberWithExtension}!important;}`;
         }
     });
@@ -98,8 +98,8 @@ marginBottoms.forEach((mr) => {
     var marginTopClass = mr.className.split(' ');
     marginTopClass.forEach((mrClass) => {
         if (mrClass.includes('mr-[')) {
-            const dotClassName = getDotClassName(mrClass);
-            const numberWithExtension = getNumberWithExtension(mrClass);
+            const dotClassName = marginGetDotClassName(mrClass);
+            const numberWithExtension = marginGetNumberWithExtension(mrClass);
             styledBody += `.${dotClassName} {margin-right: ${numberWithExtension}!important;}`;
         }
     });
@@ -109,7 +109,7 @@ marginBottoms.forEach((mr) => {
 
 
 
-function getDotClassName(mtClass) {
+function marginGetDotClassName(mtClass) {
     var mtClassToArray = mtClass.split("");
     var length = mtClassToArray.length;
     mtClassToArray.splice(3, 0, '\\[');
@@ -120,9 +120,9 @@ function getDotClassName(mtClass) {
     return mtClassToString;
 }
 
-function getNumberWithExtension(mtClass) {
+function marginGetNumberWithExtension(mtClass) {
     const mtClassNumWithPx = mtClass.split('-')[1];
-    const mtClassNum = justNumbers(mtClassNumWithPx); // get only number
+    const mtClassNum = marginJustNumbers(mtClassNumWithPx); // get only number
     const getExtensionWithBracket = mtClassNumWithPx.replace(mtClassNum, '');
     const getExtensionWithOutBracket = getExtensionWithBracket.replace(']', '');
     const getExt = getExtensionWithOutBracket.replace('[', '');
@@ -131,10 +131,9 @@ function getNumberWithExtension(mtClass) {
 
 
 
-function justNumbers(string) {
+function marginJustNumbers(string) {
     var numsStr = string.replace(/[^0-9]/g, '');
     return parseInt(numsStr);
 }
 
-let styled = `<style type="text/css">${styledBody}</style>`;
-document.querySelectorAll('head')[0].innerHTML += styled;
+document.querySelectorAll('head')[0].innerHTML += `<style type="text/css">${styledBody}</style>`;
