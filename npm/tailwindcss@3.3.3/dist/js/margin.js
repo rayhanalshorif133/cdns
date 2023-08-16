@@ -34,7 +34,7 @@ marginLeftRights.forEach((mx) => {
     });
 });
 
-// find all mx- * Margin Top
+// find all my- * Margin Top and bottom
 var marginTopBottoms = document.querySelectorAll('[class*="my-"]');
 marginTopBottoms.forEach((my) => {
     var marginClass = my.className.split(' ');
@@ -42,7 +42,7 @@ marginTopBottoms.forEach((my) => {
         if (myClass.includes('my-[')) {
             const dotClassName = getDotClassName(myClass);
             const numberWithExtension = getNumberWithExtension(myClass);
-            styledBody += `.${dotClassName} {margin-left: ${numberWithExtension}!important;margin-right: ${numberWithExtension}!important;}`;
+            styledBody += `.${dotClassName} {margin-top: ${numberWithExtension}!important;margin-bottom: ${numberWithExtension}!important;}`;
         }
     });
 });
