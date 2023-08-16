@@ -23,7 +23,7 @@
         <link rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
         <!-- Include Tailwind CSS -->
-        <!-- <script src="https://cdn.tailwindcss.com"></script> -->
+        <script src="https://cdn.tailwindcss.com"></script>
         <!-- <script src="js/tailwind.config.js"></script> -->
 
         <!-- Include react -->
@@ -36,15 +36,68 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     </head>
     <body>
-        <div id="playground"></div>
-        <div class="">
-            <div class="mx-[10rem]"> mx-[10rem] </div>
-            <div class="m-[10rem]"> m-[10rem] </div>
-            <div class="ml-[10rem]"> ml-[10rem] </div>
-            <div class="mt-[10rem]"> mt-[10rem] </div>
-            <div class="mr-[10rem]"> mr-[10rem] </div>
-            <div class="mb-[10rem]"> mb-[10rem] </div>
+        <div class="absolute top-0 bg-[#343535] h-20 w-full">
+            <div class="flex items-center justify-between w-10/12 m-auto">
+                <div class="flex">
+                    <a href="/"
+                        class="mt-1 text-5xl font-bold text-slate-100 cdnHome"><
+                        <span class="text-red-400">cdn</span>s ></a>
+                </div>
+                <div class="flex">
+                    <nav class="flex justify-center my-auto mt-4 space-x-3">
+                        <a href="#"
+                            class="hidden px-3 py-2 text-xl font-semibold rounded-lg text-slate-100">About</a>
+                        <a href="./libraries.html"
+                            class="px-3 py-2 text-xl font-semibold rounded-lg text-slate-100">Libraries</a>
+                        <a href="#"
+                            class="hidden px-3 py-2 text-xl font-semibold rounded-lg text-slate-100">API</a>
+                        <a href="#"
+                            class="hidden px-3 py-2 text-xl font-semibold rounded-lg text-slate-100">GitHub</a>
+                        <a href="./playground.html"
+                            class="px-3 py-2 text-xl font-semibold rounded-lg text-slate-100">Playground</a>
+                        <a href="#" class="hidden px-3 py-2 text-xl font-semibold rounded-lg text-slate-100">
+                            <div class="flex items-center justify-center m-auto">
+                                <div>Status</div>
+                                <span class="relative flex w-3 h-3 mx-3">
+                                    <span
+                                        class="absolute inline-flex w-full h-full bg-green-500 rounded-full opacity-75 animate-ping"></span>
+                                    <span
+                                        class="relative inline-flex w-3 h-3 bg-green-600 rounded-full"></span>
+                                </span>
+                            </div>
+                        </a>
+                    </nav>
+                </div>
+            </div>
         </div>
+        <div class="bg-[#3A3C3C] w-full mt-[4rem]">
+            <div class="items-center w-10/12 m-auto">
+                <div class="flex justify-between">
+                    <h2 class="py-10 text-2xl">
+                        <a href="#"
+                            class="text-[#D9643A] hover:text-[#BC4C2B] font-normal">Home</a>
+                        <span class="mx-2 text-3xl font-semibold text-white">/</span>
+                        <a href="/libraries.html"
+                            class="text-[#D9643A] hover:text-[#BC4C2B] font-normal">
+                            Playground
+                        </a>
+                    </h2>
+                    <h2 class="py-10 text-xl">
+                        <a href="https://codepen.io/rayhanalshorif133/pen/qBLWqWd" target="_blank">
+                            <button class="bg-[#F87171] hover:bg-[#D9643A] text-white font-bold py-2 px-6 rounded-2xl">
+                                See on Code Pen
+                            </button>
+                        </a>
+                    </h2>
+                </div>
+            </div>
+        </div>
+        <iframe class="h-screen" style="width: 100%;" scrolling="no" title="cdns" src="https://codepen.io/rayhanalshorif133/embed/qBLWqWd?default-tab=html" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
+            See the Pen <a href="https://codepen.io/rayhanalshorif133/pen/qBLWqWd">
+            cdns</a> by Rayhan Al Shorif (<a href="https://codepen.io/rayhanalshorif133">@rayhanalshorif133</a>)
+            on <a href="https://codepen.io">CodePen</a>.
+        </iframe>
+        
         <script src=https://cdn.jsdelivr.net/gh/rayhanalshorif133/cdns/npm/tailwindcss@3.3.3/dist/js/margin.min.js></script>
         <!-- <script type="text/babel" src="./js/react/playground.js"></script> -->
         <!-- <script src=https://cdn.jsdelivr.net/gh/rayhanalshorif133/cdns/npm/tailwindcss@3.3.3/dist/js/margin.js></script> -->
