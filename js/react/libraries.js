@@ -15,42 +15,42 @@ const Header = () => {
 
     return (
         <div className="bg-[#343535] h-20 w-full sticky top-0 z-30">
-            <div className="flex justify-between w-11/12 m-auto items-center">
+            <div className="flex items-center justify-between w-11/12 m-auto">
                 <div className="flex">
                     <a href={homeUrl}
-                        className="text-5xl font-semibold text-slate-100 mt-1 cdnHome">
-                        <i className="fa-solid fa-chevron-left text-gray-400"></i><span
+                        className="mt-1 text-5xl font-semibold text-slate-100 cdnHome">
+                        <i className="text-gray-400 fa-solid fa-chevron-left"></i><span
                             className="text-red-400">cdn</span>s<i
-                                className="fa-solid fa-chevron-right text-gray-400"></i></a>
+                                className="text-gray-400 fa-solid fa-chevron-right"></i></a>
                 </div>
                 <div className="flex">
-                    <nav className="hidden xl:flex justify-center space-x-3 my-auto mt-4">
+                    <nav className="justify-center hidden my-auto mt-4 space-x-3 xl:flex">
                         <a href="#"
-                            className="rounded-lg px-3 py-2 text-xl font-bold text-slate-100">About</a>
+                            className="hidden px-3 py-2 text-xl font-bold rounded-lg text-slate-100">About</a>
                         <a href="./libraries.html"
-                            className="rounded-lg px-3 py-2 text-xl font-bold text-slate-400">Libraries</a>
+                            className="px-3 py-2 text-xl font-bold rounded-lg text-slate-400">Libraries</a>
                         <a href="#"
-                            className="rounded-lg px-3 py-2 text-xl font-bold text-slate-100">API</a>
+                            className="hidden px-3 py-2 text-xl font-bold rounded-lg text-slate-100">API</a>
                         <a href="#"
-                            className="rounded-lg px-3 py-2 text-xl font-bold text-slate-100">GitHub</a>
+                            className="hidden px-3 py-2 text-xl font-bold rounded-lg text-slate-100">GitHub</a>
                          <a href="./playground.html"
                             class="rounded-lg px-3 py-2 text-xl font-semibold text-slate-100">Playground</a>
                         <a href="#"
-                            className="rounded-lg px-3 py-2 text-xl font-bold text-slate-100">
+                            className="hidden px-3 py-2 text-xl font-bold rounded-lg text-slate-100">
                             <div
-                                className="flex flex justify-center items-center m-auto">
+                                className="flex items-center justify-center m-auto">
                                 <div>Status</div>
-                                <span className="relative flex h-3 w-3 mx-3">
+                                <span className="relative flex w-3 h-3 mx-3">
                                     <span
-                                        className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75"></span>
+                                        className="absolute inline-flex w-full h-full bg-green-500 rounded-full opacity-75 animate-ping"></span>
                                     <span
-                                        className="relative inline-flex rounded-full h-3 w-3 bg-green-600"></span>
+                                        className="relative inline-flex w-3 h-3 bg-green-600 rounded-full"></span>
                                 </span>
                             </div>
                         </a>
                     </nav>
-                    <nav className="flex xl:hidden justify-center space-x-3 my-auto mt-4">
-                        <a href="#" className="rounded-lg px-3 py-2 text-xl font-bold text-slate-100" onClick={handleMobileNavBtn}>
+                    <nav className="flex justify-center my-auto mt-4 space-x-3 xl:hidden">
+                        <a href="#" className="px-3 py-2 text-xl font-bold rounded-lg text-slate-100" onClick={handleMobileNavBtn}>
                             <i class="fa-solid fa-bars text-xl"></i>
                         </a>
                     </nav>
@@ -65,27 +65,27 @@ const Header = () => {
 
 const MobileNav = () => {
     return (
-        <div className="xl:hidden justify-start flex flex-col absolute bg-gray-800 w-full h-auto right-0 top-20 transition ease-in-out delay-150">
+        <div className="absolute right-0 flex flex-col justify-start w-full h-auto transition ease-in-out delay-150 bg-gray-800 xl:hidden top-20">
             <a href="#"
-                className="rounded-lg px-7 py-4 text-xl font-bold text-slate-100">About</a>
+                className="hidden py-4 text-xl font-bold rounded-lg px-7 text-slate-100">About</a>
             <a href="./libraries.html"
-                className="rounded-lg px-7 py-4 text-xl font-bold text-slate-400">Libraries</a>
+                className="py-4 text-xl font-bold rounded-lg px-7 text-slate-400">Libraries</a>
             <a href="#"
-                className="rounded-lg px-7 py-4 text-xl font-bold text-slate-100">API</a>
+                className="hidden py-4 text-xl font-bold rounded-lg px-7 text-slate-100">API</a>
             <a href="#"
-                className="rounded-lg px-7 py-4 text-xl font-bold text-slate-100">GitHub</a>
+                className="hidden py-4 text-xl font-bold rounded-lg px-7 text-slate-100">GitHub</a>
             <a href="./playground.html"
                             class="rounded-lg px-7 py-4 text-xl font-bold text-slate-100">Playground</a>
             <a href="#"
-                className="rounded-lg px-7 py-4 text-xl font-bold text-slate-100">
+                className="py-4 text-xl font-bold rounded-lg px-7 text-slate-100">
                 <div
-                    className="flex flex justify-start items-start m-auto">
+                    className="flex items-start justify-start m-auto">
                     <div>Status</div>
-                    <span className="relative flex h-3 w-3 mx-3 mt-2">
+                    <span className="relative flex w-3 h-3 mx-3 mt-2">
                         <span
-                            className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75"></span>
+                            className="absolute inline-flex w-full h-full bg-green-500 rounded-full opacity-75 animate-ping"></span>
                         <span
-                            className="relative inline-flex rounded-full h-3 w-3 bg-green-600"></span>
+                            className="relative inline-flex w-3 h-3 bg-green-600 rounded-full"></span>
                     </span>
                 </div>
             </a>
@@ -107,21 +107,21 @@ const BootcampAndSearch = () => {
 
     return (
         <div className="bg-[#3A3C3C] w-full py-3">
-            <div className="w-10/12 m-auto items-center">
+            <div className="items-center w-10/12 m-auto">
                 <div>
-                    <h2 className="text-2xl py-10">
+                    <h2 className="py-10 text-2xl">
                         <a href={homeUrl}
                             className="text-[#D9643A] hover:text-[#BC4C2B] font-normal">Home</a>
-                        <span className="text-white font-semibold text-3xl mx-2">/</span>
+                        <span className="mx-2 text-3xl font-semibold text-white">/</span>
                         <a href="/libraries.html"
                             className="text-[#D9643A] hover:text-[#BC4C2B] font-normal">Libraries</a>
                     </h2>
                 </div>
             </div>
-            <div className="flex justify-center mx-auto mt-10 w-full">
+            <div className="flex justify-center w-full mx-auto mt-10">
                 <div className="relative w-6/12 pt-10 pb-4 my-auto">
                     <input
-                        className="border-2 border-gray-300 bg-white h-14 px-5 pr-16 w-full rounded-lg text-xl focus:outline-none placeholder:text-gray-700 placeholder:font-normal"
+                        className="w-full px-5 pr-16 text-xl bg-white border-2 border-gray-300 rounded-lg h-14 focus:outline-none placeholder:text-gray-700 placeholder:font-normal"
                         type="search" name="search"
                         placeholder="Search for cdns" ref={inputRef} onChange={handleInput} />
                     <i
@@ -130,7 +130,7 @@ const BootcampAndSearch = () => {
             </div>
             <div className="flex justify-center mx-auto">
                 <h3 className="text-lg text-[#8EA6A6] text-semibold py-2">
-                    {libraries.length > 0 ? <span className="text-cdnColor font-semibold">{libraries.length}</span> : "Many"} libraries found in {fetchTime}{
+                    {libraries.length > 0 ? <span className="font-semibold text-cdnColor">{libraries.length}</span> : "Many"} libraries found in {fetchTime}{
                         fetchTime > 1 ? "s" : "ms"
                     }.</h3>
             </div>
@@ -143,8 +143,8 @@ const Library = () => {
 
 
     return (<div className={`bg-[#454647] w-full ${libraries.length < 6? 'h-screen': 'h-auto'} pb-10`}>
-        <div className="w-11/12 xl:w-10/12 w-7/12 mx-auto pt-6 xl:pt-10">
-            <div className="grid grid-cols-1 2xl:grid-cols-2 gap-4 3xl:gap-6">
+        <div className="w-7/12 w-11/12 pt-6 mx-auto xl:w-10/12 xl:pt-10">
+            <div className="grid grid-cols-1 gap-4 2xl:grid-cols-2 3xl:gap-6">
                 {
                     libraries.length > 0 && libraries.map((item, index) => {
                         return (<LibraryBox key={index} item={item} />)
@@ -176,23 +176,23 @@ const LibraryBox = ({ item }) => {
                     <span className="text-2xl font-semibold">{name}</span>
                     <span className="text-base"> @{version}</span>
                 </div>
-                <div className="text-xl font-semibold space-x-1 pr-2 flex">
+                <div className="flex pr-2 space-x-1 text-xl font-semibold">
                     <Tooltip message={tooltipMsg}>
-                        <i className="fa-solid fa-link cursor-pointer text-white hover:text-gray-400 px-1 copyUrlBtn" data-clipboard-text={url}></i>
+                        <i className="px-1 text-white cursor-pointer fa-solid fa-link hover:text-gray-400 copyUrlBtn" data-clipboard-text={url}></i>
                     </Tooltip>
                     <Tooltip message={'Copy_Script_Tag'}>
                         <i
-                            className="fa-solid fa-code cursor-pointer text-white hover:text-gray-400 px-1 copyUrlBtn" data-clipboard-text={urlWithTags}></i>
+                            className="px-1 text-white cursor-pointer fa-solid fa-code hover:text-gray-400 copyUrlBtn" data-clipboard-text={urlWithTags}></i>
                     </Tooltip>
                     <Tooltip message={'See_more'}>
                         <i
-                            className="fa-solid fa-eye cursor-pointer text-white hover:text-gray-400 px-1"></i>
+                            className="px-1 text-white cursor-pointer fa-solid fa-eye hover:text-gray-400"></i>
                     </Tooltip>
                 </div>
             </div>
             <div className="px-5">
-                <h2 className="text-base text-white font-semibold">{description}</h2>
-                <h3 className="text-sm text-white font-base mt-3 tags">
+                <h2 className="text-base font-semibold text-white">{description}</h2>
+                <h3 className="mt-3 text-sm text-white font-base tags">
                     Tags:
                     {
                         tags.map((tag, index) => {
@@ -214,9 +214,9 @@ const LibraryBox = ({ item }) => {
 
 function Tooltip({ message, children }) {
     return (
-        <div className="group relative flex">
+        <div className="relative flex group">
             {children}
-            <span className="absolute top-10 scale-0 w-50 transition-all rounded bg-gray-800 p-2 text-sm text-white group-hover:scale-100">{message}</span>
+            <span className="absolute p-2 text-sm text-white transition-all scale-0 bg-gray-800 rounded top-10 w-50 group-hover:scale-100">{message}</span>
         </div>
     )
 }
